@@ -1,5 +1,8 @@
 module.exports = {
-    purge: [],
+    content: [
+        "./src/app/**/*.{ts,tsx}",
+        "./src/components/**/*.{ts,tsx}",
+    ],
     darkMode: false,
     theme: {
         extend: {
