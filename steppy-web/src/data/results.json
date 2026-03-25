@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "User Login",
+    "steps": [
+      "Given the user is on the login page",
+      "When the user enters valid credentials",
+      "Then the user should be redirected to the dashboard",
+      "And a welcome message should be displayed"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Add Item to Cart",
+    "steps": [
+      "Given the user is browsing the product catalogue",
+      "When the user clicks Add to Cart on a product",
+      "Then the cart count should increase by one",
+      "And the product should appear in the cart"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "User Logout",
+    "steps": [
+      "Given the user is logged in",
+      "When the user clicks the logout button",
+      "Then the session should be cleared",
+      "And the user should be redirected to the login page"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Password Reset",
+    "steps": [
+      "Given the user has forgotten their password",
+      "When the user submits their email address",
+      "Then a reset link should be sent to the email",
+      "And the link should expire after 24 hours"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Search Results",
+    "steps": [
+      "Given the user is on the search page",
+      "When the user types a query and clicks Submit",
+      "Then a list of matching results should be displayed",
+      "But no results should show if the query is empty"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Checkout Flow",
+    "steps": [
+      "Given the user has items in their cart",
+      "When the user proceeds to checkout",
+      "Then the order summary should be shown",
+      "And the user should be able to confirm the order"
+    ]
+  }
+]
