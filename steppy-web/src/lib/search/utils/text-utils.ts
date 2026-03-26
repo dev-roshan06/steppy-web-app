@@ -1,16 +1,6 @@
 /**
- * Converts a string into a normalised array of lowercase alphanumeric tokens.
- *
- * Strips curly braces, quotes, and Cucumber parameter placeholders, then splits
- * on any non-alphanumeric character. Used to prepare both the search query and
- * step expressions for token-level comparison.
- *
- * @example
- * tokenize('I click the {string} button')
- * // => ['i', 'click', 'the', 'button']
- *
- * @param str - The raw string to tokenize.
- * @returns Array of clean lowercase tokens with empty strings removed.
+ * Splits a string into lowercase alphanumeric tokens, stripping quotes and Cucumber placeholders.
+ * Used to prepare both the search query and step expressions for comparison.
  */
 export function tokenize(str: string): string[] {
 	return str.toLowerCase()
@@ -20,19 +10,8 @@ export function tokenize(str: string): string[] {
 }
 
 /**
- * Computes the Levenshtein (edit) distance between two strings.
- *
- * Used for fuzzy matching: a distance of ≤ 2 is considered a probable match,
- * accounting for typos, plural forms, and minor spelling variations.
- *
- * @example
- * levenshtein('click', 'clik') // => 1
- * levenshtein('navigate', 'naviage') // => 1
- *
- * @param a - First string.
- * @param b - Second string.
- * @returns The minimum number of single-character edits (insert, delete, replace)
- *          needed to transform `a` into `b`.
+ * Computes the Levenshtein edit distance between two strings.
+ * Used for fuzzy matching — a distance of ≤ 2 is treated as a probable match.
  */
 export function levenshtein(a: string, b: string): number {
 	if (a.length === 0) return b.length;
@@ -61,20 +40,8 @@ export function levenshtein(a: string, b: string): number {
 }
 
 /**
- * Determines whether a candidate step expression is meaningfully different
- * from a list of already-seen expressions.
- *
- * Two expressions are considered duplicates when they share the same token
- * sequence with at most 1 differing token (for longer steps) or zero differing
- * tokens (for short steps of ≤ 5 words). Steps longer than 150 characters are
- * always rejected to avoid noise.
- *
+ * Returns true if a candidate step expression is sufficiently different from all existing ones.
  * Used during catalog generation to deduplicate near-identical step variants.
- *
- * @param candidate - The new step expression to evaluate.
- * @param existing  - Expressions already accepted into the result set.
- * @returns `true` if the candidate is distinct enough to include, `false` if it
- *          is too similar to an existing entry.
  */
 export function isMeaningfullyDistinct(candidate: string, existing: string[]): boolean {
 	if (candidate.length > 150) return false;

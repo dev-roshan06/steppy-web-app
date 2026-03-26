@@ -7,7 +7,11 @@ interface ToggleProps {
 
 export function Toggle({ value, onValueChange }: ToggleProps) {
     return (
-        <Tabs className="flex items-center" value={value} onValueChange={onValueChange}>
+        <Tabs
+            className="flex items-center"
+            value={value}
+            onValueChange={onValueChange ? (val) => onValueChange(String(val)) : undefined}
+        >
             <TabsList>
                 <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
                 <TabsTrigger value="steps">Steps</TabsTrigger>
