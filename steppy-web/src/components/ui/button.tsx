@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "[font-family:Monaco,Menlo,monospace] bg-steppy-blue text-xl text-primary-foreground hover:bg-steppy-blue/80"
+        default: "[font-family:Monaco,Menlo,monospace] text-xl text-button-text bg-button"
       },
       size: {
         default: "h-[50px] w-[110px] rounded-[18px]"

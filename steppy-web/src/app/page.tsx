@@ -58,7 +58,7 @@ export default function Home() {
     })();
 
     return (
-        <div className="flex justify-center items-center w-screen h-screen bg-steppy-bg">
+        <div className="flex justify-center items-center w-screen h-screen bg-background">
             <Screen>
                 <Header />
                 <div className="flex flex-col justify-center w-full px-[24px] gap-6">
@@ -76,15 +76,15 @@ export default function Home() {
                     <Toggle value={activeTab} onValueChange={v => setActiveTab(v as TabValue)} />
                 </div>
                 <div className="flex-1 min-h-0 w-full h-full px-[24px] pb-[24px]">
-                    <ScrollArea className="h-full w-full rounded-[18px] bg-steppy-panel p-1.5">
+                    <ScrollArea className="h-full w-full rounded-[18px] p-1.5">
                         <div className="flex flex-col gap-3 p-4">
                             {!results && !isLoading && (
-                                <p className="text-sm text-muted-foreground text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
+                                <p className="text-sm text-text/60 text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
                                     Enter a search query to find steps and scenarios.
                                 </p>
                             )}
                             {results && visibleResults.length === 0 && (
-                                <p className="text-sm text-muted-foreground text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
+                                <p className="text-sm text-text/60 text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
                                     No results found.
                                 </p>
                             )}
