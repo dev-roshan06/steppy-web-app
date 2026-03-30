@@ -3,23 +3,34 @@
 import Image from "next/image"
 import logo from "@/assets/steppy-logo.svg"
 import { Settings } from "lucide-react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import {PopoverTrigger, Popover, PopoverTitle, PopoverContent} from "@/components/ui/popover";
 import {Switch} from "@/components/ui/switch";
 import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
 export function Header() {
     const [darkMode, setDarkMode] = useState(false)
     const [limit, setLimit] = useState(10)
+    const [tempLimitInput, setTempLimitInput] = useState(limit.toString())
+    const triggerRef = useRef<HTMLButtonElement>(null)
 
     function handleDarkMode(checked: boolean) {
         setDarkMode(checked)
         document.documentElement.classList.toggle("dark", checked)
     }
 
-    function handleLimitChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const val = parseInt(e.target.value)
-        if (!isNaN(val)) setLimit(val)
+    function isValidLimit(value: string): boolean {
+        const val = parseInt(value)
+        return !isNaN(val) && val >= 0 && val <= 50
+    }
+
+    function handleSave() {
+        if (isValidLimit(tempLimitInput)) {
+            const val = parseInt(tempLimitInput)
+            setLimit(val)
+            triggerRef.current?.click()
+        }
     }
 
     return (
@@ -31,25 +42,28 @@ export function Header() {
                 Steppy
             </span>
             <Popover>
-                <PopoverTrigger className="ml-auto">
-                    <button className="text-gray-500 hover:text-gray-700">
-                        <Settings size={30} />
-                    </button>
+                <PopoverTrigger ref={triggerRef} className="ml-auto text-gray-500 hover:text-gray-700">
+                    <Settings size={30} />
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent className="w-80">
                     <PopoverTitle>Settings</PopoverTitle>
-                    <div className="flex items-center justify-between">
-                        <p style={{ fontFamily: 'Monaco, Menlo, monospace' }}>Dark Mode</p>
-                        <Switch checked={darkMode} onCheckedChange={handleDarkMode} />
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <p style={{ fontFamily: 'Monaco, Menlo, monospace' }}>Limit</p>
-                        <Input
-                            id="limit"
-                            value={limit}
-                            onChange={handleLimitChange}
-                            className={`w-[65px] h-[30px] rounded-xs`}
-                        />
+                    <div className="space-y-4 flex flex-col">
+                        <div className="flex items-center justify-between">
+                            <p style={{ fontFamily: 'Monaco, Menlo, monospace' }} className="text-sm">Dark Mode</p>
+                            <Switch checked={darkMode} onCheckedChange={handleDarkMode} className="scale-125" />
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <p style={{ fontFamily: 'Monaco, Menlo, monospace' }} className="text-sm">Limit</p>
+                            <Input
+                                value={tempLimitInput}
+                                onChange={(e) => setTempLimitInput(e.target.value)}
+                                className={`h-[40px] w-[70px] rounded-[10px] border-0 border-b text-center text-base ${
+                                    !isValidLimit(tempLimitInput) && tempLimitInput !== '' ? 'border-2 border-warning text-warning' : ''
+                                }`}
+                                placeholder={limit.toString()}
+                            />
+                        </div>
+                        <Button size="sm" className="self-end" onClick={handleSave}>Save</Button>
                     </div>
                 </PopoverContent>
             </Popover>

@@ -18,9 +18,11 @@
     --color-button-text: var(--btn-text-value);
     --color-text: var(--text-value);
     --color-input-text: var(--input-text-value);
+    --color-input-placeholder: var(--input-placeholder-value);
 
     /* UI Elements */
     --color-popover: var(--popover-value);
+    --color-popover-text: var(--popover-text);
     --color-primary-foreground: var(--primary-foreground-value);
     --color-input: var(--input-value);
     --color-scroll-area: var(--scroll-area-value);
@@ -28,6 +30,10 @@
     --color-tab-list-text: var(--tab-list-text-value);
     --color-tab: var(--tab-value);
     --color-tab-text: var(--tab-text-value);
+    --switch-on: var(--switch-on-color);
+    --switch-off: var(--switch-off-color);
+    --color-switch-thumb: var(--switch-thumb);
+    --color-warning: var(--color-red);
 
     /* Base Design Tokens */
     --color-ring: var(--ring);
@@ -48,6 +54,9 @@
     --color-light-blue: #0088ff;
     --color-light-text: #f1f1f2;
     --color-dark-text: #3B3E4F;
+    --color-red: #ff5555;
+    --color-green: #50fa7b;
+
 
     /* Semantic Color Values (Light Mode) */
     --bg-value: var(--color-light-screen);
@@ -56,7 +65,9 @@
     --btn-text-value: #f1f1f2;
     --text-value: var(--color-dark-text);
     --input-text-value: var(--color-dark-text);
+    --input-placeholder-value: var(--color-dark-text);
     --popover-value: var(--color-light-text);
+    --popover-text: var(--color-dark-text);
     --primary-foreground-value: var(--color-light-text);
     --input-value: var(--color-light-text);
     --scroll-area-value: var(--color-light-text);
@@ -64,11 +75,14 @@
     --tab-value: var(--color-light-blue);
     --tab-list-text-value: var(--color-dark-text);
     --tab-text-value: var(--color-light-text);
+    --switch-on-color: var(--color-green);
+    --switch-off-color: var(--color-red);
+    --switch-thumb: var(--color-light-text);
 
     /* Design Tokens (oklch format for contrast/accessibility) */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
-    --ring: oklch(0.708 0 0);
+    --ring: #44475a;
     --border: oklch(0.922 0 0);
 }
 
@@ -87,8 +101,10 @@
     --btn-value: var(--color-dark-purple);
     --btn-text-value: #f1f1f2;
     --text-value: var(--color-light-text);
-    --input-text-value: var(--color-light-text);
+    --input-text-value: var(--color-dark-text);
+    --input-placeholder-value: var(--color-dark-text);
     --popover-value: var(--color-dark-text);
+    --popover-text: var(--color-light-text);
     --primary-foreground-value: var(--color-dark-text);
     --input-value: var(--color-light-text);
     --scroll-area-value: var(--color-dark-text);
@@ -96,6 +112,9 @@
     --tab-value: var(--color-dark-purple);
     --tab-list-text-value: var(--color-dark-text);
     --tab-text-value: var(--color-light-text);
+    --switch-on: var(--switch-on-color);
+    --switch-off: var(--switch-off-color);
+    --switch-thumb: var(--color-dark-text);
 
 
     /* Design Tokens (oklch - dark mode adjustments) */
@@ -112,7 +131,8 @@
     }
 
     body {
-        @apply bg-background text-foreground;
+        background-color: var(--bg-value);
+        color: var(--fg-value);
     }
 
     html {

@@ -10,10 +10,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "[font-family:Monaco,Menlo,monospace] text-xl text-button-text bg-button"
+        default: "[font-family:Monaco,Menlo,monospace] text-xl text-button-text bg-button",
       },
       size: {
-        default: "h-[50px] w-[110px] rounded-[18px]"
+        default: "h-[50px] w-[110px] rounded-[18px]",
+        sm: "h-[40px] w-[70px] rounded-[10px] text-sm"
       },
     },
     defaultVariants: {
