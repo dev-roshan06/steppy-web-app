@@ -31,7 +31,17 @@ export function ResultCard({ title, steps }: ResultCardProps) {
     return (
         <div className="relative flex flex-col gap-1.5 rounded-[18px] px-4 py-3 bg-result">
             <p className="text-sm font-bold text-text pr-8 font-monaco">
-                {title}
+                <SyntaxHighlighter
+                    language="gherkin"
+                    style={isDarkMode ? dracula : github}
+                    customStyle={{
+                        background: "transparent",
+                        padding: 0,
+                        margin: 0,
+                    }}
+                >
+                    {title}
+                </SyntaxHighlighter>
             </p>
             <div className="pr-8 font-monaco">
                 <SyntaxHighlighter

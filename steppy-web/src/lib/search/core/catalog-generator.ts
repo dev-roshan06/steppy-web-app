@@ -54,10 +54,11 @@ function getTableHeaders(lines: string[], startIdx: number): string[] | null {
  */
 function updateStepUsage(stepDef: StepDefinition, stepText: string, keyword: string) {
 	stepDef.usageCount++;
-	if(!stepDef.metadata.exampleUsages.includes(stepText)) {
+	const exampleWithKeyword = `${keyword} ${stepText}`;
+	if(!stepDef.metadata.exampleUsages.includes(exampleWithKeyword)) {
 		if(stepDef.metadata.exampleUsages.length < 5) { // Example usage is limited to 5 here, could increase later
 			if(stepDef.metadata.exampleUsages.length === 0 || isMeaningfullyDistinct(stepText, stepDef.metadata.exampleUsages)) {
-				stepDef.metadata.exampleUsages.push(stepText);
+				stepDef.metadata.exampleUsages.push(exampleWithKeyword);
 			}
 		}
 	}

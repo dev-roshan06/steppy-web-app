@@ -50,7 +50,7 @@ export default function Home() {
             : [];
         const stepCards = (activeTab === "steps" || activeTab === "all")
             ? results.steps.map(r => ({
-                title: r.expression ?? "",
+                title: r.examples ? r.examples[0] : "",
                 steps: r.examples ?? [],
             }))
             : [];
