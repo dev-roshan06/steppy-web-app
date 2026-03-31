@@ -23,6 +23,7 @@ export interface StepDefinition {
 		isTableStep: boolean;
 		paramCount: number;
 		applicableRoles?: string[];
+        applicableKeywords?: string[];
 		dataSchemas?: string[][];
 	};
 	usageCount: number;
