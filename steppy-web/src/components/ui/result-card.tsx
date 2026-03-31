@@ -50,7 +50,7 @@ export function ResultCard({ title, steps, type = "step" }: ResultCardProps) {
                 </button>
             )}
             {!isScenario && (
-                <p className="text-sm font-bold text-text pr-8 font-monaco">
+                <div className="text-sm font-bold text-text pr-8 font-monaco">
                     <SyntaxHighlighter
                         language="gherkin"
                         style={isDarkMode ? dracula : github}
@@ -62,7 +62,7 @@ export function ResultCard({ title, steps, type = "step" }: ResultCardProps) {
                     >
                         {title}
                     </SyntaxHighlighter>
-                </p>
+                </div>
             )}
             {isExpanded && (
                 <div className="pr-8 font-monaco">
