@@ -2,9 +2,16 @@
 
 import Image from "next/image"
 import logo from "@/assets/steppy-logo.svg"
-import { Settings } from "lucide-react"
+import {Bot, Settings} from "lucide-react"
 import { useState, useRef } from "react"
-import {PopoverTrigger, Popover, PopoverTitle, PopoverContent} from "@/components/ui/popover";
+import {
+    PopoverTrigger,
+    Popover,
+    PopoverTitle,
+    PopoverContent,
+    PopoverHeader,
+    PopoverDescription
+} from "@/components/ui/popover";
 import {Switch} from "@/components/ui/switch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
@@ -35,17 +42,27 @@ export function Header() {
 
     return (
         <div className="relative flex items-center w-full h-[60px] bg-steppy-teal rounded-t-[24px] px-8">
-            <button>
-                <Image src={logo} alt="Steppy logo" height={60} width={60} />
-            </button>
-            <span className="absolute left-1/2 -translate-x-1/2 text-2xl font-medium text-gray-600 dark:text-[#F8F8F2]" style={{ fontFamily: 'var(--font-hind)' }}>
+            <Popover>
+                <PopoverTrigger className='mr-auto text-button-text hover:text-gray-400'>
+                    {/*<Image src={logo} alt="Steppy logo" height={60} width={60} />*/}
+                    <Bot size={25}/>
+                </PopoverTrigger>
+                <PopoverContent align="center">
+                    <PopoverTitle className="flex justify-center">Steppy</PopoverTitle>
+                    <div className="flex flex-col justify-center items-center font-monaco">
+                        <p className="text-gray-400 text-xs">1.0.0</p>
+                    </div>
+                </PopoverContent>
+            </Popover>
+
+            <span className="absolute left-1/2 -translate-x-1/2 text-lg font-monaco text-button-text">
                 Steppy
             </span>
             <Popover>
-                <PopoverTrigger ref={triggerRef} className="ml-auto text-gray-500 hover:text-gray-700">
-                    <Settings size={30} />
+                <PopoverTrigger ref={triggerRef} className="ml-auto text-button-text hover:text-gray-400">
+                    <Settings size={25} />
                 </PopoverTrigger>
-                <PopoverContent className="w-80">
+                <PopoverContent className="w-80" align="center">
                     <PopoverTitle>Settings</PopoverTitle>
                     <div className="space-y-4 flex flex-col">
                         <div className="flex items-center justify-between">

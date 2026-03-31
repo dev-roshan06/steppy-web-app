@@ -9,6 +9,7 @@ import { Toggle } from "@/components/ui/toggle";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ResultCard } from "@/components/ui/result-card";
 import type { SearchResult } from "@/lib/search";
+import {Bot} from "lucide-react";
 
 type TabValue = "scenarios" | "steps" | "all";
 

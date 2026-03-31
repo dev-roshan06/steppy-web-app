@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 module.exports = {
-    allowedDevOrigins: ['192.168.68.103'],
+    allowedDevOrigins: ['192.168.1.168'],
 }
 const nextConfig: NextConfig = {
   reactCompiler: true,
