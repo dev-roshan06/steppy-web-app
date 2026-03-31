@@ -58,6 +58,7 @@ export interface SearchResult {
 	score: number;
 	expression?: string;
 	name?: string;
+	keyword?: string;
 	usageCount?: number;
 	examples?: string[];
 	tags?: string[];

@@ -35,6 +35,7 @@
     --color-switch-thumb: var(--switch-thumb);
     --color-warning: var(--color-red);
     --color-result: var(--result-value);
+    --color-chevron: var(--chevron-value);
 
     /* Base Design Tokens */
     --color-ring: var(--ring);
@@ -81,6 +82,7 @@
     --switch-off-color: var(--color-red);
     --switch-thumb: var(--color-light-text);
     --result-value: var(--color-grey);
+    --chevron-value: var(--color-light-teal);
 
     /* Design Tokens (oklch format for contrast/accessibility) */
     --background: oklch(1 0 0);
@@ -97,6 +99,7 @@
     --color-dark-screen: #1a1a2e;
     --color-dark-bg: #44475A;
     --color-dark-purple: #bd93f9;
+    --color-dark-cyan: #8be9fd;
 
     /* Semantic Color Values (Dark Mode) */
     --bg-value: var(--color-dark-screen);
@@ -119,6 +122,7 @@
     --switch-off: var(--switch-off-color);
     --switch-thumb: var(--color-dark-text);
     --result-value: var(--color-dark-bg);
+    --chevron-value: var(--color-dark-cyan);
 
 
     /* Design Tokens (oklch - dark mode adjustments) */

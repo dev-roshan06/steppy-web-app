@@ -71,6 +71,7 @@ export class SearchEngine {
 			return {
 				score,
 				expression: s.expression,
+				keyword: s.keyword,
 				usageCount: s.usageCount,
 				examples: s.metadata?.exampleUsages,
 				source: `${s.source.uri}:${s.source.line}`,
@@ -165,7 +166,7 @@ export class SearchEngine {
 				score,
 				name: s.name,
 				tags: s.tags,
-				steps: includeSteps ? s.steps : undefined,
+				steps: s.steps,
 				source: `${s.source.uri}:${s.source.line}`,
 			};
 		}).filter((r: any) => r.score > 0)

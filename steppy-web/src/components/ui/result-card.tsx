@@ -1,6 +1,6 @@
 "use client"
 
-import { Copy } from "lucide-react"
+import { Copy, ChevronDown } from "lucide-react"
 import { useState, useEffect } from "react"
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"
 import gherkin from "react-syntax-highlighter/dist/esm/languages/hljs/gherkin"
@@ -11,10 +11,13 @@ SyntaxHighlighter.registerLanguage("gherkin", gherkin)
 interface ResultCardProps {
     title: string
     steps: string[]
+    type?: "scenario" | "step"
+    keyword?: string
 }
 
-export function ResultCard({ title, steps }: ResultCardProps) {
+export function ResultCard({ title, steps, type = "step" }: ResultCardProps) {
     const [isDarkMode, setIsDarkMode] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(type === "step")
 
     useEffect(() => {
         const checkDarkMode = () => {
@@ -28,35 +31,55 @@ export function ResultCard({ title, steps }: ResultCardProps) {
         return () => observer.disconnect()
     }, [])
 
+    const isScenario = type === "scenario"
+
     return (
         <div className="relative flex flex-col gap-1.5 rounded-[18px] px-4 py-3 bg-result">
-            <p className="text-sm font-bold text-text pr-8 font-monaco">
-                <SyntaxHighlighter
-                    language="gherkin"
-                    style={isDarkMode ? dracula : github}
-                    customStyle={{
-                        background: "transparent",
-                        padding: 0,
-                        margin: 0,
-                    }}
+            {isScenario && (
+                <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="flex items-center gap-2 hover:opacity-70 mb-1"
                 >
-                    {title}
-                </SyntaxHighlighter>
-            </p>
-            <div className="pr-8 font-monaco">
-                <SyntaxHighlighter
-                    language="gherkin"
-                    style={isDarkMode ? dracula : github}
-                    customStyle={{
-                        background: "transparent",
-                        padding: 0,
-                        margin: 0,
-                        fontSize: "0.8rem",
-                    }}
-                >
-                    {steps.join("\n")}
-                </SyntaxHighlighter>
-            </div>
+                    <ChevronDown
+                        size={16}
+                        className={`transition-transform ${isExpanded ? 'rotate-0' : '-rotate-90'} text-chevron`}
+                    />
+                    <p className="text-sm font-bold text-text pr-8 font-monaco">
+                        {title}
+                    </p>
+                </button>
+            )}
+            {!isScenario && (
+                <p className="text-sm font-bold text-text pr-8 font-monaco">
+                    <SyntaxHighlighter
+                        language="gherkin"
+                        style={isDarkMode ? dracula : github}
+                        customStyle={{
+                            background: "transparent",
+                            padding: 0,
+                            margin: 0,
+                        }}
+                    >
+                        {title}
+                    </SyntaxHighlighter>
+                </p>
+            )}
+            {isExpanded && (
+                <div className="pr-8 font-monaco">
+                    <SyntaxHighlighter
+                        language="gherkin"
+                        style={isDarkMode ? dracula : github}
+                        customStyle={{
+                            background: "transparent",
+                            padding: 0,
+                            margin: 0,
+                            fontSize: "0.8rem",
+                        }}
+                    >
+                        {steps.join("\n")}
+                    </SyntaxHighlighter>
+                </div>
+            )}
             <button className="absolute top-3 right-3 text-gray-300 hover:text-gray-500 transition-colors">
                 <Copy size={16} />
             </button>

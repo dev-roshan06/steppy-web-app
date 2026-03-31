@@ -40,18 +40,20 @@ export default function Home() {
         if (e.key === "Enter") handleSearch();
     }
 
-    const visibleResults: { title: string; steps: string[] }[] = (() => {
+    const visibleResults: { title: string; steps: string[]; type: "scenario" | "step"; keyword?: string }[] = (() => {
         if (!results) return [];
         const scenarioCards = (activeTab === "scenarios" || activeTab === "all")
             ? results.scenarios.map(r => ({
                 title: r.name ?? "",
                 steps: r.steps ?? [],
+                type: "scenario" as const,
             }))
             : [];
         const stepCards = (activeTab === "steps" || activeTab === "all")
             ? results.steps.map(r => ({
                 title: r.examples ? r.examples[0] : "",
                 steps: r.examples ?? [],
+                type: "step" as const,
             }))
             : [];
         return [...scenarioCards, ...stepCards];
@@ -93,6 +95,7 @@ export default function Home() {
                                     key={i}
                                     title={item.title}
                                     steps={item.steps}
+                                    type={item.type}
                                 />
                             ))}
                         </div>
