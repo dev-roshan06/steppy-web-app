@@ -49,11 +49,11 @@ export function Header() {
                     <PopoverTitle>Settings</PopoverTitle>
                     <div className="space-y-4 flex flex-col">
                         <div className="flex items-center justify-between">
-                            <p style={{ fontFamily: 'Monaco, Menlo, monospace' }} className="text-sm">Dark Mode</p>
+                            <p className="text-sm font-monaco">Dark Mode</p>
                             <Switch checked={darkMode} onCheckedChange={handleDarkMode} className="scale-125" />
                         </div>
                         <div className="flex items-center justify-between">
-                            <p style={{ fontFamily: 'Monaco, Menlo, monospace' }} className="text-sm">Limit</p>
+                            <p className="text-sm font-monaco">Limit</p>
                             <Input
                                 value={tempLimitInput}
                                 onChange={(e) => setTempLimitInput(e.target.value)}

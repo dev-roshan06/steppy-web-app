@@ -34,6 +34,7 @@
     --switch-off: var(--switch-off-color);
     --color-switch-thumb: var(--switch-thumb);
     --color-warning: var(--color-red);
+    --color-result: var(--result-value);
 
     /* Base Design Tokens */
     --color-ring: var(--ring);
@@ -56,6 +57,7 @@
     --color-dark-text: #3B3E4F;
     --color-red: #ff5555;
     --color-green: #50fa7b;
+    --color-grey: #e7e7e7;
 
 
     /* Semantic Color Values (Light Mode) */
@@ -78,6 +80,7 @@
     --switch-on-color: var(--color-green);
     --switch-off-color: var(--color-red);
     --switch-thumb: var(--color-light-text);
+    --result-value: var(--color-grey);
 
     /* Design Tokens (oklch format for contrast/accessibility) */
     --background: oklch(1 0 0);
@@ -115,6 +118,7 @@
     --switch-on: var(--switch-on-color);
     --switch-off: var(--switch-off-color);
     --switch-thumb: var(--color-dark-text);
+    --result-value: var(--color-dark-bg);
 
 
     /* Design Tokens (oklch - dark mode adjustments) */
@@ -137,5 +141,9 @@
 
     html {
         @apply font-sans;
+    }
+
+    .font-monaco {
+        font-family: Monaco, Menlo, monospace;
     }
 }

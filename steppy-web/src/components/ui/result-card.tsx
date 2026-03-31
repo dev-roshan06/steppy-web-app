@@ -1,9 +1,10 @@
 "use client"
 
 import { Copy } from "lucide-react"
+import { useState, useEffect } from "react"
 import { Light as SyntaxHighlighter } from "react-syntax-highlighter"
 import gherkin from "react-syntax-highlighter/dist/esm/languages/hljs/gherkin"
-import { githubGist } from "react-syntax-highlighter/dist/esm/styles/hljs"
+import { dracula, github } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
 SyntaxHighlighter.registerLanguage("gherkin", gherkin)
 
@@ -13,21 +14,34 @@ interface ResultCardProps {
 }
 
 export function ResultCard({ title, steps }: ResultCardProps) {
+    const [isDarkMode, setIsDarkMode] = useState(false)
+
+    useEffect(() => {
+        const checkDarkMode = () => {
+            setIsDarkMode(document.documentElement.classList.contains("dark"))
+        }
+        checkDarkMode()
+
+        const observer = new MutationObserver(checkDarkMode)
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
+        return () => observer.disconnect()
+    }, [])
+
     return (
-        <div className="relative flex flex-col gap-1.5 rounded-[18px] px-4 py-3 shadow-sm">
-            <p className="text-sm font-bold text-gray-700 pr-8" style={{ fontFamily: 'Monaco, Menlo, monospace' }}>
+        <div className="relative flex flex-col gap-1.5 rounded-[18px] px-4 py-3 bg-result">
+            <p className="text-sm font-bold text-text pr-8 font-monaco">
                 {title}
             </p>
-            <div className="pr-8">
+            <div className="pr-8 font-monaco">
                 <SyntaxHighlighter
                     language="gherkin"
-                    style={githubGist}
+                    style={isDarkMode ? dracula : github}
                     customStyle={{
                         background: "transparent",
                         padding: 0,
                         margin: 0,
                         fontSize: "0.8rem",
-                        fontFamily: "Monaco, Menlo, monospace",
                     }}
                 >
                     {steps.join("\n")}

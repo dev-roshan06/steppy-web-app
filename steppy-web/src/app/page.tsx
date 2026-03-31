@@ -79,12 +79,12 @@ export default function Home() {
                     <ScrollArea className="h-full w-full rounded-[18px] p-1.5">
                         <div className="flex flex-col gap-3 p-4">
                             {!results && !isLoading && (
-                                <p className="text-sm text-text/60 text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
+                                <p className="text-sm text-text/60 text-center py-8 font-monaco">
                                     Enter a search query to find steps and scenarios.
                                 </p>
                             )}
                             {results && visibleResults.length === 0 && (
-                                <p className="text-sm text-text/60 text-center py-8" style={{ fontFamily: "Monaco, Menlo, monospace" }}>
+                                <p className="text-sm text-text/60 text-center py-8 font-monaco">
                                     No results found.
                                 </p>
                             )}
