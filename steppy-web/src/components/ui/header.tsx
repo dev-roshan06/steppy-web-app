@@ -67,7 +67,10 @@ export function Header({ onLimitChange }: HeaderProps) {
                             <Switch checked={darkMode} onCheckedChange={handleDarkMode} className="scale-125" />
                         </div>
                         <div className="flex items-center justify-between">
-                            <p className="text-sm font-monaco">Limit</p>
+                            <div className="flex flex-row gap-2">
+                                <p className="text-sm font-monaco">Limit</p>
+                                <p className="text-sm font-monaco opacity-30">(for each)</p>
+                            </div>
                             <Input
                                 value={tempLimitInput}
                                 onChange={(e) => setTempLimitInput(e.target.value)}
@@ -77,7 +80,13 @@ export function Header({ onLimitChange }: HeaderProps) {
                                 placeholder={tempLimitInput}
                             />
                         </div>
-                        <Button size="sm" className="self-end" onClick={handleSave}>Save</Button>
+                        <div className="flex items-center justify-between">
+                            {!isValidLimit(tempLimitInput)
+                                ? <p className="text-xs font-monaco text-warning">Limit must be between 1 – 50</p>
+                                : <span />
+                            }
+                            <Button size="sm" onClick={handleSave}>Save</Button>
+                        </div>
                     </div>
                 </PopoverContent>
             </Popover>
