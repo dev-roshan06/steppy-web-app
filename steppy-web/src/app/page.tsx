@@ -9,7 +9,8 @@ import { Toggle } from "@/components/ui/toggle";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ResultCard } from "@/components/ui/result-card";
 import type { SearchResult } from "@/lib/search";
-import {Bot} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/pagination";
 
 type TabValue = "scenarios" | "steps" | "all";
 
@@ -88,52 +89,50 @@ export default function Home() {
                     </div>
                     <Toggle value={activeTab} onValueChange={v => setActiveTab(v as TabValue)} />
                 </div>
-                <div className="flex-1 min-h-0 w-full h-full px-[24px] pb-[24px]">
-                    <ScrollArea className="h-full w-full rounded-[18px] p-1.5">
-                        <div className="flex flex-col gap-3 p-4">
-                            {!results && !isLoading && (
-                                <p className="text-sm text-text/60 text-center py-8 font-monaco">
-                                    Enter a search query to find steps and scenarios.
-                                </p>
-                            )}
-                            {results && visibleResults.length === 0 && (
-                                <p className="text-sm text-text/60 text-center py-8 font-monaco">
-                                    No results found.
-                                </p>
-                            )}
-                            {paginatedResults.map((item, i) => (
-                                <ResultCard
-                                    key={i}
-                                    title={item.title}
-                                    steps={item.steps}
-                                    type={item.type}
-                                />
-                            ))}
-                        </div>
+                <div className="flex flex-col min-h-0 w-full h-full px-[24px] pb-[24px]">
+                    <div className="flex flex-col h-full rounded-[18px] bg-scroll-area overflow-hidden">
+                        <ScrollArea className="flex-1 w-full p-1.5">
+                            <div className="flex flex-col gap-3 p-4">
+                                {!results && !isLoading && (
+                                    <p className="text-sm text-text/60 text-center py-8 font-monaco">
+                                        Enter a search query to find steps and scenarios.
+                                    </p>
+                                )}
+                                {results && visibleResults.length === 0 && (
+                                    <p className="text-sm text-text/60 text-center py-8 font-monaco">
+                                        No results found.
+                                    </p>
+                                )}
+                                {paginatedResults.map((item, i) => (
+                                    <ResultCard
+                                        key={i}
+                                        title={item.title}
+                                        steps={item.steps}
+                                        type={item.type}
+                                    />
+                                ))}
+                            </div>
+                        </ScrollArea>
                         {totalPages > 1 && (
-                            <div className="flex items-center justify-center gap-4 pt-2">
-                                <Button
-                                    onClick={() =>
-                                        setCurrentPage(p => Math.max(1, p-1))
-                                    }
+                            <div className="flex items-center justify-center gap-4 py-3">
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                     disabled={currentPage === 1}
                                 >
-                                    Prev
-                                </Button>
-                                <span>
-                                    {currentPage} / {totalPages}
+                                    <ChevronLeft className="text-popover-text"/>
+                                </button>
+                                <span className="text-text font-monaco text-sm">
+                                    {currentPage}/{totalPages}
                                 </span>
-                                <Button
-                                    onClick={() =>
-                                        setCurrentPage(p => Math.min(totalPages, p+1))
-                                    }
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                     disabled={currentPage === totalPages}
                                 >
-                                    Next
-                                </Button>
+                                    <ChevronRight className="text-popover-text"/>
+                                </button>
                             </div>
                         )}
-                    </ScrollArea>
+                    </div>
                 </div>
             </Screen>
         </div>
