@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
 	const { searchParams } = new URL(request.url);
 	const q = searchParams.get("q")?.trim();
 	const type = searchParams.get("type") ?? "all";
-	const limit = Number(searchParams.get("limit")) || 10;
+	const limit = Number(searchParams.get("limit")) || 100;
 
 	if (!q) {
 		return NextResponse.json({ error: "Missing query parameter 'q'" }, { status: 400 });
