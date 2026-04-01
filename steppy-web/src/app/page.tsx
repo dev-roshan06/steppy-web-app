@@ -23,15 +23,19 @@ export default function Home() {
     const [results, setResults] = useState<SearchResults | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [activeTab, setActiveTab] = useState<TabValue>("all");
+    const [searchLimit, setSearchLimit] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
+    const perPage = 10;
 
     async function handleSearch() {
         const q = query.trim();
         if (!q) return;
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/search?q=${encodeURIComponent(q)}&type=all`);
+            const res = await fetch(`/api/search?q=${encodeURIComponent(q)}&type=all&limit=${searchLimit}`);
             const data: SearchResults = await res.json();
             setResults(data);
+            setCurrentPage(1);
         } finally {
             setIsLoading(false);
         }
@@ -60,10 +64,16 @@ export default function Home() {
         return [...scenarioCards, ...stepCards];
     })();
 
+    const totalPages = Math.ceil(visibleResults.length / perPage);
+    const paginatedResults = visibleResults.slice(
+        (currentPage - 1) * perPage,
+        currentPage * perPage
+    );
+
     return (
         <div className="flex justify-center items-center w-screen h-screen bg-background">
             <Screen>
-                <Header />
+                <Header onLimitChange={(limit) => { setSearchLimit(limit); setCurrentPage(1); }} />
                 <div className="flex flex-col justify-center w-full px-[24px] gap-6">
                     <div className="flex flex-row gap-4">
                         <Input
@@ -91,7 +101,7 @@ export default function Home() {
                                     No results found.
                                 </p>
                             )}
-                            {visibleResults.map((item, i) => (
+                            {paginatedResults.map((item, i) => (
                                 <ResultCard
                                     key={i}
                                     title={item.title}
@@ -100,6 +110,29 @@ export default function Home() {
                                 />
                             ))}
                         </div>
+                        {totalPages > 1 && (
+                            <div className="flex items-center justify-center gap-4 pt-2">
+                                <Button
+                                    onClick={() =>
+                                        setCurrentPage(p => Math.max(1, p-1))
+                                    }
+                                    disabled={currentPage === 1}
+                                >
+                                    Prev
+                                </Button>
+                                <span>
+                                    {currentPage} / {totalPages}
+                                </span>
+                                <Button
+                                    onClick={() =>
+                                        setCurrentPage(p => Math.min(totalPages, p+1))
+                                    }
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next
+                                </Button>
+                            </div>
+                        )}
                     </ScrollArea>
                 </div>
             </Screen>

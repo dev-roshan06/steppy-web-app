@@ -171,7 +171,7 @@ export class SearchEngine {
 			};
 		}).filter((r: any) => r.score > 0)
 			.sort((a: any, b: any) => b.score - a.score)
-			.slice(0, 10);
+			.slice(0, 100);
 
 		const limit = Number(flags.limit) || 10;
 		const threshold = Number(flags.threshold) || 0;

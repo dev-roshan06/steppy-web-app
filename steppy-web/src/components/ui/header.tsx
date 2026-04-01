@@ -1,7 +1,4 @@
 "use client"
-
-import Image from "next/image"
-import logo from "@/assets/steppy-logo.svg"
 import {Bot, Settings} from "lucide-react"
 import { useState, useRef } from "react"
 import {
@@ -9,14 +6,16 @@ import {
     Popover,
     PopoverTitle,
     PopoverContent,
-    PopoverHeader,
-    PopoverDescription
 } from "@/components/ui/popover";
 import {Switch} from "@/components/ui/switch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 
-export function Header() {
+interface HeaderProps {
+    onLimitChange: (limit: number) => void
+}
+
+export function Header({ onLimitChange }: HeaderProps) {
     const [darkMode, setDarkMode] = useState(false)
     const [limit, setLimit] = useState(10)
     const [tempLimitInput, setTempLimitInput] = useState(limit.toString())
@@ -36,6 +35,7 @@ export function Header() {
         if (isValidLimit(tempLimitInput)) {
             const val = parseInt(tempLimitInput)
             setLimit(val)
+            onLimitChange(val)
             triggerRef.current?.click()
         }
     }
