@@ -52,7 +52,10 @@ export default function Home() {
                             {isLoading ? "..." : "Submit"}
                         </Button>
                     </div>
-                    <Toggle value={activeTab} onValueChange={v => setActiveTab(v as TabValue)} />
+                    <Toggle value={activeTab} onValueChange={v => {
+                        setActiveTab(v as TabValue)
+                        setCurrentPage(1)
+                    }} />
                 </div>
                 <div className="flex flex-col min-h-0 w-full h-full px-[24px] pb-[24px]">
                     <div className="flex flex-col h-full rounded-[18px] bg-scroll-area overflow-hidden">
