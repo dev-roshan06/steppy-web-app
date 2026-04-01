@@ -10,15 +10,13 @@ import {
 import {Switch} from "@/components/ui/switch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-
 interface HeaderProps {
     onLimitChange: (limit: number) => void
 }
 
 export function Header({ onLimitChange }: HeaderProps) {
     const [darkMode, setDarkMode] = useState(false)
-    const [limit, setLimit] = useState(10)
-    const [tempLimitInput, setTempLimitInput] = useState(limit.toString())
+    const [tempLimitInput, setTempLimitInput] = useState("10")
     const triggerRef = useRef<HTMLButtonElement>(null)
 
     function handleDarkMode(checked: boolean) {
@@ -34,14 +32,13 @@ export function Header({ onLimitChange }: HeaderProps) {
     function handleSave() {
         if (isValidLimit(tempLimitInput)) {
             const val = parseInt(tempLimitInput)
-            setLimit(val)
             onLimitChange(val)
             triggerRef.current?.click()
         }
     }
 
     return (
-        <div className="relative flex items-center w-full h-[60px] bg-steppy-teal rounded-t-[24px] px-8">
+        <div className="relative flex items-center w-full h-[60px] bg-steppy-teal rounded-t-[24px] p-8">
             <Popover>
                 <PopoverTrigger className='mr-auto text-button-text hover:text-gray-400'>
                     {/*<Image src={logo} alt="Steppy logo" height={60} width={60} />*/}
@@ -77,7 +74,7 @@ export function Header({ onLimitChange }: HeaderProps) {
                                 className={`h-[40px] w-[70px] rounded-[10px] border-0 border-b text-center text-base ${
                                     !isValidLimit(tempLimitInput) && tempLimitInput !== '' ? 'border-2 border-warning text-warning' : ''
                                 }`}
-                                placeholder={limit.toString()}
+                                placeholder={tempLimitInput}
                             />
                         </div>
                         <Button size="sm" className="self-end" onClick={handleSave}>Save</Button>

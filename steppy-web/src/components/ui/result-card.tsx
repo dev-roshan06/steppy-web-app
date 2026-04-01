@@ -17,7 +17,7 @@ interface ResultCardProps {
 
 export function ResultCard({ title, steps, type = "step" }: ResultCardProps) {
     const [isDarkMode, setIsDarkMode] = useState(false)
-    const [isExpanded, setIsExpanded] = useState(type === "step")
+    const [isExpanded, setIsExpanded] = useState(false)
 
     useEffect(() => {
         const checkDarkMode = () => {
